@@ -3,10 +3,11 @@
 //   - A compile time constraint that an object can not be modified
 //
 
-int i = 1;
+const int i = 1;
+i=6 //not compile
 
 const int *p1 = &i;  // data is const, pointer is not
-
+//p1++ compile but *p1=5 will not
 int* const p2 = &i;  // pointer is const, data is not
 
 const int* const p3;  // data and pointer are both const
@@ -23,9 +24,9 @@ int const *p4 = &i;   // data is const, pointer is not
 /*
   Why use const
 		a.) Guard against inadvertent write to the variable.
-		b.) Self documenting
+		b.) Self documenting -> tis value is not change
 		c.) Enable compiler to do more optimiztion, making code tighter.
-		d.) const usually means the variable is put in ROM. 
+		d.) const usually means the variable is put in ROM.  read only memory
 */
 
 
@@ -40,14 +41,14 @@ public:
    Dog() { age = 3; name = "dummy"; }
    
    // const parameters
-   void setAge(const int& a) { age = a; }
+   void setAge(const int& a) { age = a; } //isse age ki value change nahi kar paenge
    void setAge(int& a) { age = a; }
    
    // Const return value
-   const string& getName() {return name;}
+   const string& getName() {return name;}  //
    
    // const function
-   void printDogName() const { cout << name << "const" << endl; }
+   void printDogName() const { cout << name << "const" << endl; }    //this func will not change any of the variable  //invoke when dog is const
    void printDogName() { cout << getName() << " non-const" << endl; }
 };
 
